@@ -27,11 +27,11 @@ There are two variables you can use:
 - `name`: you can define the name of the service which will be shown 
 - `type`: the type of the response
 
-The name can be any string. Default value is "noname".<br>
+The `name` can be any string. Default value is "noname".<br>
 Type can be
-- html (default value)
-- plain
-- json
+- `html` (default value)
+- `plain`
+- `json`
 
 You can override these variables by the GET parameter, like
 ```
