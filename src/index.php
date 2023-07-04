@@ -1,0 +1,35 @@
+<?php
+
+    //helper functions
+    function purge(string $string): string{
+        return str_replace(array(".", "/", "\\"), "", $string);
+    }
+    function isValidResponseType(string $type): bool{
+        if (file_exists("response/" . purge($type))) return true;
+        return false;
+    }
+    
+    //define response type by get / env / default
+    $response_type = "html";
+    if (isset($_GET["type"])){
+        $requested_type = purge($_GET["type"]);
+        if (isValidResponseType($requested_type)) $response_type = $requested_type;
+    } else if (isset($_ENV["type"])){
+        $requested_type = purge($_ENV["type"]);
+        if (isValidResponseType($requested_type)) $response_type = $requested_type;
+    }
+    
+    //define "var" by get / env / default
+    $var_override = "";
+    if (isset($_GET["var"])){
+        $var_override = $_GET["var"];
+    } else if (isset($_ENV["var"])){
+        $var_override = $_ENV["var"];
+    }
+
+    //generate response
+    $response = file_get_contents("response/" . $response_type);
+    $response = str_replace("{var}", $var_override, $response);
+    
+    echo $response;
+?>
