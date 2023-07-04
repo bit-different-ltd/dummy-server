@@ -13,7 +13,7 @@
     }
     
     //define "var" by get / env / default
-    $var_override = "";
+    $var_override = "noname";
     if (isset($_GET["var"])){
         $var_override = $_GET["var"];
     } else if (isset($_ENV["var"])){
