@@ -6,7 +6,7 @@ When you are building and testing your whole infrastructure, you will need a sim
 
 ### How can you use it?
 It's a simple Docker-based server that you can bind to on port 80.
-On a local environment you can use docker-compose:
+In a local environment, you can use `docker-compose`:
 
 ```
 docker-compose up
@@ -18,22 +18,22 @@ Or run the container by `docker run` itself:
 docker run -d -t -i -e name=web1 -e type=plain -p 80:80 dummy-server
 ```
 
-You don't need to clone this repository and build this image for yourself, it can be found on the Docker Hub:
+You don't need to clone this repository and build this image for yourself; it can be found on the Docker Hub:
 ```
 docker run -d -t -i -e name=web1 -e type=plain -p 80:80 norbertszabomyplancloud/dummy-server
 ```
 
 There are two variables you can use:
-- `name`: you can define the name of the service which will be shown 
+- `name`: you can define the name of the service that will be shown 
 - `type`: the type of the response
 
 The `name` can be any string. Default value is "noname".<br>
-Type can be
+Type can be:
 - `html` (default value)
 - `plain`
 - `json`
 
-You can override these variables by the GET parameter, like
+You can override these variables with the GET parameter, like this:
 ```
 http://localhost?type=json&name=web1
 ```
