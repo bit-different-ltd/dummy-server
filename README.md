@@ -15,12 +15,12 @@ docker-compose up
 Or run the container by `docker run` itself:
 
 ```
-docker run -d -t -i -e name=web1 -e type=plain -p 80:80 dummy-server
+docker run -d -e name=web1 -e type=plain -p 80:80 dummy-server
 ```
 
 You don't need to clone this repository and build this image for yourself; it can be found on the Docker Hub:
 ```
-docker run -d -t -i -e name=web1 -e type=plain -p 80:80 norbertszabomyplancloud/dummy-server
+docker run -d -e name=web1 -e type=plain -p 80:80 norbertszabomyplancloud/dummy-server
 ```
 
 There are two variables you can use:
