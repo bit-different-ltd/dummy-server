@@ -12,17 +12,20 @@
         if (isValidResponseType($requested_type)) $response_type = $requested_type;
     }
     
-    //define "var" by get / env / default
-    $var_override = "noname";
-    if (isset($_GET["var"])){
-        $var_override = $_GET["var"];
-    } else if (isset($_ENV["var"])){
-        $var_override = $_ENV["var"];
+    //define "name" variable by get / env / default
+    $name_override = "noname";
+    if (isset($_GET["name"])){
+        $name_override = $_GET["name"];
+    } else if (isset($_ENV["name"])){
+        $name_override = $_ENV["name"];
     }
 
     //generate response
     $response = file_get_contents("response/" . $response_type);
-    $response = str_replace("{var}", $var_override, $response);
+    $response = str_replace("{name}", $name_override, $response);
     $response = str_replace("{motivation}", getMotivation(), $response);
+
+    //json format
+    if ($response_type == "json") header('Content-Type: application/json; charset=utf-8');
     
     echo $response;

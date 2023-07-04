@@ -1,1 +1,1 @@
-{"response":"Service {var} is on roll. {motivation}"}
+{"response":"Service {name} is on roll. {motivation}"}
