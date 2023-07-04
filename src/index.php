@@ -1,14 +1,7 @@
 <?php
 
-    //helper functions
-    function purge(string $string): string{
-        return str_replace(array(".", "/", "\\"), "", $string);
-    }
-    function isValidResponseType(string $type): bool{
-        if (file_exists("response/" . purge($type))) return true;
-        return false;
-    }
-    
+    require_once "include.php";
+
     //define response type by get / env / default
     $response_type = "html";
     if (isset($_GET["type"])){
@@ -30,6 +23,6 @@
     //generate response
     $response = file_get_contents("response/" . $response_type);
     $response = str_replace("{var}", $var_override, $response);
+    $response = str_replace("{motivation}", getMotivation(), $response);
     
     echo $response;
-?>
