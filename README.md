@@ -18,6 +18,11 @@ Or run the container by `docker run` itself:
 docker run -d -t -i -e name=web1 -e type=plain -p 80:80 dummy-server
 ```
 
+You don't need to clone this repository and build this image for yourself, it can be found on the Docker Hub:
+```
+docker run -d -t -i -e name=web1 -e type=plain -p 80:80 norbertszabomyplancloud/dummy-server
+```
+
 There are two variables you can use:
 - `name`: you can define the name of the service which will be shown 
 - `type`: the type of the response
