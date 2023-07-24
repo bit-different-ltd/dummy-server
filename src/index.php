@@ -25,7 +25,10 @@
     $response = str_replace("{name}", $name_override, $response);
     $response = str_replace("{motivation}", getMotivation(), $response);
 
-    //json format
-    if ($response_type == "json") header('Content-Type: application/json; charset=utf-8');
+    //json format & special characters
+    if ($response_type == "json"){
+		header('Content-Type: application/json; charset=utf-8');
+		$response = json_encode(array("response"=>$response));
+	}
     
     echo $response;
