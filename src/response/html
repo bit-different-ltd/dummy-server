@@ -15,13 +15,14 @@
         .checkboxes{margin: 40px 0;}
 
         .checkbox-label{border-style: solid; border-color: rgba(0,0,0,0.1); border-width: 1px; padding: 5px 15px; margin: 5px; cursor: pointer;}
-        .checkbox-label input{position: relative; top: 2px; padding: 0; margin: 0; margin-right: 5px;}
+            .checkbox-label input{position: relative; top: 2px; padding: 0; margin: 0; margin-right: 5px;}
         
-        #details{text-align: left; background-color: rgba(0,0,0,0.05); font-size: 12px; height: 300px; overflow: auto;}
-            #details table{width: 100%; table-layout: fixed; word-wrap: break-word; overflow-wrap: break-word; padding: 5px;}
-                #details table td{padding: 5px;}
+        #details{padding: 5px; text-align: left; background-color: rgba(0,0,0,0.05); font-size: 12px; height: 300px; overflow: auto;}
+            #details table{width: 100%; table-layout: fixed; word-wrap: break-word; overflow-wrap: break-word; padding: 5px;border-collapse:collapse;}
+                #details table td{padding: 10px;}
                 #details table td:nth-child(1){width: 150px; font-weight: bold;}
                 #details table td:nth-child(2){}
+                #details table tr.tabletitle{font-size: 16px; background-color: rgba(0,0,0,0.1);}
 
         .rounded{border-radius: 5px;}
         .hide{display: none;}

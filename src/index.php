@@ -27,9 +27,21 @@
 
     if ($response_type == "html"){
         $details = "";
+        
+        $details .= '<tr class="tabletitle"><td>SERVER</td><td></td></tr>';
         foreach ($_SERVER as $k => $v){
             $details .= "<tr><td>";
-            $details .= str_replace("_", " ", $k);
+            $details .= strtolower(str_replace("_", " ", $k));
+            $details .= "</td><td>";
+            $details .= (!is_array($v)) ? $v : print_r($v, true);
+            $details .= "</td></tr>";
+        }
+
+        $details .= '<tr class="tabletitle"><td>COOKIE</td><td></td></tr>';
+
+        foreach ($_COOKIE as $k => $v){
+            $details .= "<tr><td>";
+            $details .= $k;
             $details .= "</td><td>";
             $details .= (!is_array($v)) ? $v : print_r($v, true);
             $details .= "</td></tr>";
