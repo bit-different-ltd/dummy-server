@@ -6,25 +6,45 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik|Rubik:bold" />
     <style>
         body{font-family: "Rubik", sans-serif; display: grid; grid-template-rows: 100vh; grid-template-columns: 100vw; margin: 0; padding: 0; font-size: 16px;}
-        #content{justify-self: center; align-self: center; display: block; text-align: center;}
-        #title{font-size: 42px; font-weight: bold; margin: 10px 0; padding: 10px 30px; background-color: rgba(0,0,0,0.05); display: inline-block;}
+        #content{justify-self: center; align-self: center; display: block; text-align: center; max-width: 100%; width: 800px; max-height: 90%;}
+
+        #title{font-size: 42px; font-weight: bold; margin: 10px 0; padding: 10px 30px; display: inline-block; background-color: #00aae1; color: white;}
         #url{display: block; width: 100px; position: absolute; bottom: 10px; right: 10px;}
         #logo{width: 100%;}
-        #checkbox-label{border-style: solid; border-color: rgba(0,0,0,0.1); border-width: 1px; padding: 5px 10px;}
+
+        .checkboxes{margin: 40px 0;}
+
+        .checkbox-label{border-style: solid; border-color: rgba(0,0,0,0.1); border-width: 1px; padding: 5px 15px; margin: 5px; cursor: pointer;}
+        .checkbox-label input{position: relative; top: 2px; padding: 0; margin: 0; margin-right: 5px;}
+        
+        #details{text-align: left; background-color: rgba(0,0,0,0.05); font-size: 12px; height: 300px; overflow: auto;}
+            #details table{width: 100%; table-layout: fixed; word-wrap: break-word; overflow-wrap: break-word; padding: 5px;}
+                #details table td{padding: 5px;}
+                #details table td:nth-child(1){width: 150px; font-weight: bold;}
+                #details table td:nth-child(2){}
+
+        .rounded{border-radius: 5px;}
+        .hide{display: none;}
     </style>
     <script src="jquery.min.js"></script>
 </head>
 <body>
     <div id="content">
         Service<br />
-        <span id="title">{name}</span><br />
+        <span id="title" class="">{name}</span><br />
         is on roll.<br />
         {motivation}<br />
-        <br />
-        <br />
-        <label id="checkbox-label"><input id="checkbox" type="checkbox"> auto refresh</label>
+        <div class="checkboxes">
+            <label class="checkbox-label rounded"><input id="refresh_checkbox" type="checkbox"> auto refresh</label>
+            <label class="checkbox-label rounded"><input id="details_checkbox" type="checkbox"> details</label>
+        </div>
+        <div id="details" class="hide">
+            <table>
+                {details}
+            </table>
+        </div>
     </div> 
-    <a id="url" target="_blank" href="https://myplan.cloud/"><img id="logo" src="logo.svg" /></a>
+    <a id="url" target="_blank" href="https://myplan.cloud/"><img id="logo" src="/logo.svg" /></a>
 
     <script>
         function getCookie(cname) {
@@ -40,13 +60,13 @@
                 return c.substring(name.length, c.length);
                 }
             }
-            return "";
+            return null;
         }
 
+        //autorefresh checkbox
         let autorefresh = getCookie("autorefresh");
-        if (autorefresh == 1) $("#checkbox").prop('checked', true);
-
-        $('#checkbox').change(function(){
+        if (autorefresh == 1) $("#refresh_checkbox").prop('checked', true);
+        $('#refresh_checkbox').change(function(){
             if(this.checked){
                 document.cookie = "autorefresh=1";
                 autorefresh = 1;
@@ -55,10 +75,37 @@
                 autorefresh = 0;
             }
         });
-
         setInterval(function(){
             if (autorefresh == 1) location.reload();
         }, 1000);
+
+        //details checkbox
+        let details = getCookie("details");
+        if (details == 1){
+            $("#details_checkbox").prop('checked', true);
+            $("#details").show();
+        }
+        $('#details_checkbox').change(function(){
+            if(this.checked){
+                document.cookie = "details=1";
+                $("#details").show();
+            } else {
+                document.cookie = "details=0";
+                $("#details").hide();
+            }
+        });
+        
+        //autoscroll to saved position (only after window load because of the paddings)
+        $(window).on('load', function () {
+            $("#details").on("scroll", function() {
+                document.cookie = "details_scroll=" + $("#details").scrollTop();
+            });
+            let details_scroll = getCookie("details_scroll");
+            if (details_scroll != null) {
+                $("#details").scrollTop(details_scroll);
+            }
+
+        });
 
     </script>
 

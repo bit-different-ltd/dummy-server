@@ -25,6 +25,19 @@
     $response = str_replace("{name}", $name_override, $response);
     $response = str_replace("{motivation}", getMotivation(), $response);
 
+    if ($response_type == "html"){
+        $details = "";
+        foreach ($_SERVER as $k => $v){
+            $details .= "<tr><td>";
+            $details .= str_replace("_", " ", $k);
+            $details .= "</td><td>";
+            $details .= (!is_array($v)) ? $v : print_r($v, true);
+            $details .= "</td></tr>";
+        }
+        $response = str_replace("{details}", $details, $response);
+         
+    }
+
     //json format & special characters
     if ($response_type == "json"){
 		header('Content-Type: application/json; charset=utf-8');
