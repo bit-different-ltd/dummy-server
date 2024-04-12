@@ -27,7 +27,7 @@
         .rounded{border-radius: 5px;}
         .hide{display: none;}
     </style>
-    <script src="jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     <div id="content">
@@ -44,8 +44,7 @@
                 {details}
             </table>
         </div>
-    </div> 
-    <a id="url" target="_blank" href="https://myplan.cloud/"><img id="logo" src="/logo.svg" /></a>
+    </div>
 
     <script>
         function getCookie(cname) {
